@@ -1,5 +1,4 @@
-from tkinter import Tk, Button, Text, Menu, Scrollbar
-from tkinter.filedialog import *
+from tkinter import Tk
 from pathlib import Path
 import os
 
