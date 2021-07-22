@@ -1,5 +1,6 @@
-from tkinter import Tk
+from tkinter import Tk, Button
 from pathlib import Path
+from tkinter.scrolledtext import ScrolledText
 import os
 
 
@@ -9,6 +10,9 @@ class NotePad:
         self.height = height
         self.root = Tk()
         self.filename = "Untitled"
+        self.save = Button(self.root, width=7, height=1, text="")
+        self.text_area = ScrolledText(self.root, wrap="word")
+
 
     def configure(self):
         # Checks whether if "notepad_icon.ico" exists.
@@ -22,6 +26,10 @@ class NotePad:
         # Geometry and Title
         self.root.geometry(f"{self.width}x{self.height}")
         self.root.title(f"{self.filename} - Notepad")
+        self.save.pack(side="top", anchor="nw")
+        self.text_area.pack(fill="both", expand=True, padx=0, pady=0)
+
+
 
     def run(self):
         self.root.mainloop()
