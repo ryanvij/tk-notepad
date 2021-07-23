@@ -1,12 +1,9 @@
 import tkinter.filedialog
-from tkinter import Tk, Button, Frame
+from tkinter import Tk, Button, Frame, Label
 from pathlib import Path
 from tkinter.scrolledtext import ScrolledText
 import os
-
-
-# TODO add open file menu
-# TODO add about page
+import webbrowser
 
 
 # NotePad class
@@ -35,11 +32,28 @@ class NotePad:
         # text_area using ScrolledText, to facilitate scrolling. wrap="word" and undo=True"
         self.text_area = ScrolledText(self.root, wrap="word", undo=True)
 
+    def callback(self, url):
+        webbrowser.open_new(url)
+
     def about_page(self):
-        pass
+        self.about_page = Tk()
+        self.about_page.resizable(width=True, height=False)
+        self.about_page.title("About")
+        self.about_page.geometry("400x300")
+        self.info = Label(self.about_page, text="This a Notepad program developed by ryanvij, using Tkinter.")
+        self.info.pack()
+        self.github_link = Label(self.about_page, text="Github Repository", fg="blue", font="Verdana 10 underline")
+        self.github_link.pack()
+        self.github_link.bind("<Button-1>", lambda e: self.callback("https://github.com/ryanvij/tk-notepad"))
+        self.about_page.mainloop()
 
     def open_file(self):
-        pass
+        self.file_path = tkinter.filedialog.askopenfilename(defaultextension=".txt", filetypes=(("Text File", "*.txt"),))
+        with open(self.file_path, "r+") as f:
+            text = f.read()
+        self.text_area.delete('1.0', tkinter.END)
+        self.root.title(f"{os.path.basename(self.file_path)} - Notepad")
+        self.text_area.insert("1.0", text)
 
     def new_file(self):
         self.root.destroy()
@@ -94,6 +108,7 @@ class NotePad:
         self.save_as.pack(side="left")
         self.about_page.pack(side="left")
         self.text_area.pack(expand=True, fill="both")
+
 
     def run(self):
         self.root.mainloop()
