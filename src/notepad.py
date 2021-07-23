@@ -42,7 +42,7 @@ class NotePad:
         self.about_page.geometry("400x300")
         self.info = Label(self.about_page, text="This a Notepad program developed by ryanvij, using Tkinter.")
         self.info.pack()
-        self.github_link = Label(self.about_page, text="Github Repository", fg="blue", font="Verdana 10 underline")
+        self.github_link = Label(self.about_page, text="Github Repository", fg="blue", font="Verdana 7 underline")
         self.github_link.pack()
         self.github_link.bind("<Button-1>", lambda e: self.callback("https://github.com/ryanvij/tk-notepad"))
         self.about_page.mainloop()
