@@ -1,15 +1,17 @@
-import tkinter.filedialog
-from tkinter import Tk, Button, Frame, Label
-from pathlib import Path
-from tkinter.scrolledtext import ScrolledText
 import os
 import webbrowser
+from pathlib import Path
+from tkinter import Tk, Button, Frame, Label, filedialog, scrolledtext, constants
+
+
+# TODO clean code
 
 
 # NotePad class
 class NotePad:
     def __init__(self, width, height):
 
+        #
         self.width = width
         self.height = height
         self.root = Tk()
@@ -30,7 +32,7 @@ class NotePad:
         self.about_page = Button(self.status_bar, width=7, height=1, text="About", command=self.about_page)
 
         # text_area using ScrolledText, to facilitate scrolling. wrap="word" and undo=True"
-        self.text_area = ScrolledText(self.root, wrap="word", undo=True)
+        self.text_area = scrolledtext.ScrolledText(self.root, wrap="word", undo=True)
 
     def callback(self, url):
         webbrowser.open_new(url)
@@ -48,10 +50,10 @@ class NotePad:
         self.about_page.mainloop()
 
     def open_file(self):
-        self.file_path = tkinter.filedialog.askopenfilename(defaultextension=".txt", filetypes=(("Text File", "*.txt"),))
+        self.file_path = filedialog.askopenfilename(defaultextension=".txt", filetypes=(("Text File", "*.txt"),))
         with open(self.file_path, "r+") as f:
             text = f.read()
-        self.text_area.delete('1.0', tkinter.END)
+        self.text_area.delete('1.0', constants.END)
         self.root.title(f"{os.path.basename(self.file_path)} - Notepad")
         self.text_area.insert("1.0", text)
 
@@ -69,18 +71,18 @@ class NotePad:
             with open(self.file_path, "w") as f:
                 # Truncating file to clear it.
                 f.truncate(0)
-                f.write(self.text_area.get("1.0", tkinter.END))
+                f.write(self.text_area.get("1.0", constants.END))
         except FileNotFoundError:
             pass
 
     # Save as a new text file.
     def save_as_textfile(self):
         # Using asksaveasfilename from tkinter.filedialog to save .txt filepath
-        self.file_path = tkinter.filedialog.asksaveasfilename(defaultextension=".txt", filetypes=(("Text File", "*.txt"),))
+        self.file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=(("Text File", "*.txt"),))
         try:
             # Opening file with "w+" mode.
             with open(self.file_path, "w+") as f:
-                f.write(self.text_area.get("1.0", tkinter.END))
+                f.write(self.text_area.get("1.0", constants.END))
 
             # Getting filename from filepath and setting the title.
             self.filename = os.path.basename(self.file_path)
