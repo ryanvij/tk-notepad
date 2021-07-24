@@ -9,6 +9,7 @@ class NotePad:
     def __init__(self, width, height):
         self.width = width
         self.height = height
+        self.saved = False
         self.root = Tk()  # Initializing root window.
 
         # Setting filename as "Untitled and creating empty file_path variable. To be updated after file is saved. "
@@ -73,11 +74,14 @@ class NotePad:
     # Overwrite existing file.
     def save_existing(self):
         try:
-            # Opening file with "w" mode.
-            with open(self.file_path, "w") as f:
-                # Truncating file to clear it.
-                f.truncate(0)
-                f.write(self.text_area.get("1.0", constants.END))
+            if self.saved:
+                # Opening file with "w" mode.
+                with open(self.file_path, "w") as f:
+                    # Truncating file to clear it.
+                    f.truncate(0)
+                    f.write(self.text_area.get("1.0", constants.END))
+            else:
+                self.save_as_textfile()
         except FileNotFoundError:
             pass
 
@@ -93,6 +97,7 @@ class NotePad:
             # Getting filename from filepath and setting the title.
             self.filename = os.path.basename(self.file_path)
             self.root.title(f"{self.filename} - Notepad")
+            self.saved = True
         except FileNotFoundError:
             pass
 
