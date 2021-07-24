@@ -34,6 +34,9 @@ class NotePad:
         self.info = Label(self.about_page, text="This a Notepad program developed by ryanvij, using Tkinter.")
         self.github_link = Label(self.about_page, text="Github Repository", fg="blue", font="Verdana 7 underline")
 
+    def update_title(self, title):
+        self.root.title(f"{title} - Notepad")
+
     # Opens github repository on default browser.
     @staticmethod
     def callback(url):
@@ -62,7 +65,7 @@ class NotePad:
 
         # Clear text_are
         self.text_area.delete('1.0', constants.END)
-        self.root.title(f"{os.path.basename(self.file_path)} - Notepad")
+        self.update_title(os.path.basename(self.file_path))
         self.text_area.insert("1.0", text)
 
     # Destroy root and create new window.
@@ -93,10 +96,8 @@ class NotePad:
             # Opening file with "w+" mode.
             with open(self.file_path, "w+") as f:
                 f.write(self.text_area.get("1.0", constants.END))
-
             # Getting filename from filepath and setting the title.
-            self.filename = os.path.basename(self.file_path)
-            self.root.title(f"{self.filename} - Notepad")
+            self.update_title(os.path.basename(self.file_path))
             self.saved = True
         except FileNotFoundError:
             pass
