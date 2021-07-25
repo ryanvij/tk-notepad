@@ -12,6 +12,10 @@ class NotePad:
         self.saved = False
         self.root = Tk()  # Initializing root window.
 
+        self.about = None
+        self.github_link = None
+        self.info = None
+
         # Setting filename as "Untitled and creating empty file_path variable. To be updated after file is saved. "
         self.filename = "Untitled"
         self.file_path = ""
@@ -31,9 +35,6 @@ class NotePad:
         self.text_area = scrolledtext.ScrolledText(self.root, wrap="word", undo=True)
 
         # Labels on about window.
-        self.info = Label(self.about_page, text="This a Notepad program developed by ryanvij, using Tkinter.")
-        self.github_link = Label(self.about_page, text="Github Repository", fg="blue", font="Verdana 7 underline")
-
     def update_title(self, title):
         self.root.title(f"{title} - Notepad")
 
@@ -44,11 +45,13 @@ class NotePad:
 
     # Called when About button is clicked.
     def about_page(self):
-        self.about_page = Tk()
-        self.about_page.resizable(width=True, height=False)
-        self.about_page.title("About")
-        self.about_page.geometry("400x300")
+        self.about = Tk()
+        self.about.resizable(width=True, height=False)
+        self.about.title("About")
+        self.about.geometry("400x300")
 
+        self.info = Label(self.about, text="This a Notepad program developed by ryanvij, using Tkinter.")
+        self.github_link = Label(self.about, text="Github Repository", fg="blue", font="Verdana 7 underline")
         # Packing info and github_link
         self.info.pack()
         self.github_link.pack()
