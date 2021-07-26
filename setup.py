@@ -12,6 +12,7 @@ setup(name='tk-notepad',
       author='ryanvij',
       author_email='ryan.vijay2006@gmail.com',
       license='MIT',
+      python_requires='>=3.4',
       entry_points={
         'console_scripts': ['tk-notepad=tk_notepad.notepad:main']
       },
