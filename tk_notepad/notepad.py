@@ -131,6 +131,12 @@ class NotePad:
         self.root.mainloop()
 
 
-notepad = NotePad(800, 600)
-notepad.run()
+def main():
+    notepad = NotePad(800, 600)
+    notepad.run()
+
+
+if __name__ == '__main__':
+    main()
+
 
