@@ -30,7 +30,7 @@ After installing with pip or pip3, use the following command anywhere.
 or from the github repository (root)
 
 ```bash
-python tk_notepad/notepad.py
+  python tk_notepad/notepad.py
 ```
     
 
