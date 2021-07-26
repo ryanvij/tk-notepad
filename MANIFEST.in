@@ -1,3 +1,3 @@
 include README.md
 include LICENSE
-include tk_notepad/icons
+graft tk_notepad/icons
