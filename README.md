@@ -27,7 +27,7 @@ After installing with pip or pip3, use the following command anywhere.
   tk-notepad
 ```
 
-From github repository (root)
+or from the github repository (root)
 
 ```bash
 python tk_notepad/notepad.py
